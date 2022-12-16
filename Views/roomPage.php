@@ -29,7 +29,18 @@ if(!empty($_POST)){
 /* DELETE ROOM */
 if(isset($_GET['action']) && $_GET['action'] == 'delete'){
     $room->deleteRoom($room);
-    header('location:views/roomPage.php ');
+    header('location:roomPage.php ');
+}
+
+/* UPDATE ROOM */
+if(isset($_GET['action']) && $_GET['action'] == 'update'){
+    $idRoom = $room->getRoomById();
+    $detailRoom = $idRoom->fetch(PDO::FETCH_ASSOC);
+
+    if($_POST){
+        $room->updateRoom($room);
+        header('location:roomPage.php ');
+    }
 }
 
 ?>
@@ -82,7 +93,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'delete'){
                         <td> <?php echo $room['children']; ?></td>
                         <td>
                             
-                            <a href="<?php echo "?action=update&id_room=$id_room"; ?>" class="btn btn-warning"> Update</a>
+                            <a href="<?php echo "?action=update&id_room=$room[id_room]"; ?>" class="btn btn-warning"> Update</a>
                             <a href="<?php echo "?action=delete&id_room=$room[id_room]"; ?>" class="btn btn-danger"> delete</a>
                         </td>
                     </tr>                 
@@ -109,37 +120,42 @@ if(isset($_GET['action']) && $_GET['action'] == 'delete'){
                     
                 <div class="mb-3">
                     <label for="title_room" class="form-label">Titre</label>
-                    <input type="text" id="title_room" name="title_room" class="form-control" placeholder="Title">
+                    <input type="text" id="title_room" name="title_room" class="form-control" placeholder="Title" value="<?php echo $detailRoom['title_room'] ?> ">
                 </div>
                     
                 <div class="mb-3">
                     <label for="price_room" class="form-label">Prix</label>
-                    <input type="text" id="price_room" name="price_room" class="form-control" placeholder="Prix">
+                    <input type="text" id="price_room" name="price_room" class="form-control" placeholder="Prix" value="<?php echo $detailRoom['price_room'] ?>">
                 </div>
                     
                 <div class="mb-3">
                     <label for="type_chambre" class="form-label">Type de chambre</label>
-                    <input type="text" id="type_chambre" name="type_chambre" class="form-control" placeholder="Type de chambre">
+                    <input type="text" id="type_chambre" name="type_chambre" class="form-control" placeholder="Type de chambre" value="<?php echo $detailRoom['type_chambre'] ?> ">
                 </div>
                     
                 <div class="mb-3">
                     <label for="size" class="form-label">Taille de la chambre</label>
-                    <input type="text" id="size" name="size" class="form-control" placeholder="Taille de la chambre">
+                    <input type="text" id="size" name="size" class="form-control" placeholder="Taille de la chambre" value="<?php echo $detailRoom['size'] ?> ">
                 </div>
                     
                 <div class="mb-3">
                     <label for="description" class="form-label">Description de la chambre</label>
-                    <textarea type="text" id="description" name="description" class="form-control" placeholder="Description de la chambre"></textarea>
+                    <textarea type="text" id="description" name="description" class="form-control" placeholder="Description de la chambre"><?php echo $detailRoom['description'] ?></textarea>
                 </div>
                     
                 <div class="mb-3">
                     <label for="adults" class="form-label">Adults de la chambre</label>
-                    <input type="number" id="adults" name="adults" class="form-control" placeholder="Adults">
+                    <input type="text" id="adults" name="adults" class="form-control" placeholder="Adults" value="<?php echo $detailRoom['adults'] ?> ">
                 </div>
                     
                 <div class="mb-3">
                     <label for="children" class="form-label">Children de la chambre</label>
-                    <input type="number" id="children" name="children" class="form-control" placeholder="Children">
+                    <input type="text" id="children" name="children" class="form-control" placeholder="Children" value="<?php echo $detailRoom['children'] ?> ">
+                </div>
+                    
+                <div class="mb-3">
+                    <label for="status" class="form-label">Statut de la chambre</label>
+                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" value="<?php echo $detailRoom['status'] ?> ">
                 </div>
                     
                 <div class="mb-3">
