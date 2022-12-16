@@ -1,0 +1,128 @@
+<?php 
+
+require_once('../Models/Room.php');
+require_once('../Models/RoomManager.php');
+require_once('../Controller/Controller.php');
+
+
+
+// if($_POST){
+//     postRoom();
+// }
+
+$room = new Room;
+$allRooms = $room->home();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+
+            <table class="table">
+
+            <thead>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th>Type</th>
+                <th>Taille</th>
+                <th>Description</th>
+                <th>Adlutes</th>
+                <th>Enfants</th>
+            </thead>
+
+            <tbody>
+                <?php 
+                    // $getRooms = getAllRooms();
+                    while ($room = $allRooms->fetch(PDO::FETCH_ASSOC)){
+                ?>
+                    <tr>
+                        <td> <?php echo $room['title_room']; ?></td>
+                        <td> <?php echo $room['price_room']; ?> €</td>
+                        <td> <?php echo $room['type_chambre']; ?></td>
+                        <td> <?php echo $room['size']; ?></td>
+                        <td> <?php echo $room['description']; ?></td>
+                        <td> <?php echo $room['adults']; ?></td>
+                        <td> <?php echo $room['children']; ?></td>
+                    </tr>                 
+                <?php 
+                    }
+                ?>
+            </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<hr>
+<hr>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+
+
+                <form action="" method="POST">
+                    
+                <div class="mb-3">
+                    <label for="title" class="form-label">Titre</label>
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Title">
+                </div>
+                    
+                <div class="mb-3">
+                    <label for="price" class="form-label">Prix</label>
+                    <input type="text" id="price" name="price" class="form-control" placeholder="Prix">
+                </div>
+                    
+                <div class="mb-3">
+                    <label for="type" class="form-label">Type de chambre</label>
+                    <input type="text" id="type" name="type" class="form-control" placeholder="Type de chambre">
+                </div>
+                    
+                <div class="mb-3">
+                    <label for="size" class="form-label">Taille de la chambre</label>
+                    <input type="text" id="size" name="size" class="form-control" placeholder="Taille de la chambre">
+                </div>
+                    
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description de la chambre</label>
+                    <input type="text" id="description" name="description" class="form-control" placeholder="Description de la chambre">
+                </div>
+                    
+                <div class="mb-3">
+                    <label for="adults" class="form-label">Adults de la chambre</label>
+                    <input type="text" id="adults" name="adults" class="form-control" placeholder="Adults">
+                </div>
+                    
+                <div class="mb-3">
+                    <label for="children" class="form-label">Children de la chambre</label>
+                    <input type="text" id="children" name="children" class="form-control" placeholder="Children">
+                </div>
+                    
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-primary" value="Envoyer">
+                </div>
+
+                </form>
+
+        </div>
+    </div>
+</div>
+
+
+    
+</body>
+</html>
