@@ -14,7 +14,7 @@ class RoomManager{
 
     public function getAllRooms()
     {
-        $getRooms = $this->dataBase->query("SELECT * FROM room ORDER BY price_room DESC");
+        $getRooms = $this->dataBase->query("SELECT * FROM room ORDER BY size DESC");
         return $getRooms;
     }
 
@@ -46,18 +46,27 @@ class RoomManager{
     public function insertRoom(Room $room)
     {
         $req = $this->dataBase->prepare("INSERT INTO room(title_room, price_room, type_chambre, size, description, adults, children) VALUES(:title_room, :price_room, :type_chambre, :size, :description, :adults, :children)");
-        // $req->bindValue(':title_room', $room->getTitle(), PDO::PARAM_STR);
-        echo $room->getTitle();
-        // $req->bindValue(':price_room', $room->getPrice(), PDO::PARAM_STR);
-        // $req->bindValue(':type_chambre', $room->getType(), PDO::PARAM_STR);
-        // $req->bindValue(':size', $room->getSize(), PDO::PARAM_STR);
-        // $req->bindValue(':description', $room->getDescription(), PDO::PARAM_STR);
-        // $req->bindValue(':adults', $room->getAdults(), PDO::PARAM_INT);
-        // $req->bindValue(':children', $room->getChildren(), PDO::PARAM_INT);
-        // $req->execute();
+        $req->bindValue(':title_room', $room->getTitle(), PDO::PARAM_STR);
+        $req->bindValue(':price_room', $room->getPrice(), PDO::PARAM_STR);
+        $req->bindValue(':type_chambre', $room->getType(), PDO::PARAM_STR);
+        $req->bindValue(':size', $room->getSize(), PDO::PARAM_STR);
+        $req->bindValue(':description', $room->getDescription(), PDO::PARAM_STR);
+        $req->bindValue(':adults', $room->getAdults(), PDO::PARAM_INT);
+        $req->bindValue(':children', $room->getChildren(), PDO::PARAM_INT);
+        $req->execute();
     }
 
 }
+
+// $req = $this->dataBase->prepare("INSERT INTO room(title_room, price_room, type_chambre, size, description, adults, children) VALUES(:title_room, :price_room, :type_chambre, :size, :description, :adults, :children)");
+// $req->bindValue(':title_room', $_POST['title_room'], PDO::PARAM_STR);
+// $req->bindValue(':price_room',  $_POST['price_room'], PDO::PARAM_STR);
+// $req->bindValue(':type_chambre',  $_POST['type_chambre'], PDO::PARAM_STR);
+// $req->bindValue(':size',  $_POST['size'], PDO::PARAM_STR);
+// $req->bindValue(':description',  $_POST['description'], PDO::PARAM_STR);
+// $req->bindValue(':adults',  $_POST['adults'], PDO::PARAM_INT);
+// $req->bindValue(':children',  $_POST['children'], PDO::PARAM_INT);
+// $req->execute();
 
 
 ?>

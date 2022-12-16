@@ -24,6 +24,10 @@ if($_POST){
     $success = '<div class="alert alert-success" role="alert">L\'utilisateur a bien été enregistré</div>';
 }
 
+// if($_POST){
+//     var_dump($_POST['title_room'], $_POST['price_room'], $_POST['type_chambre'], $_POST['size'], $_POST['description'], $_POST['adults'], $_POST['children']);
+// }
+
 ?>
 
 <!DOCTYPE html>

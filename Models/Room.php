@@ -13,12 +13,21 @@
         const CHILDREN_INVALIDE = 7;
         const STATUS_INVALIDE = 8;
 
-        // Assignement
+        public function __construct($data)
+        {
+            if(!empty($data))
+            {
+                $this->assignement($data);
+            }
+        }
+    
         public function assignement($data)
         {
-            foreach ($data as $key => $value) {
-                $method = 'set' . ucfirst($key);
-                if (method_exists($this, $method)) {
+            foreach($data as $key => $value)
+            {
+                $method = 'set'.ucfirst($key);
+                if(method_exists($this, $method))
+                {
                     $this->$method($value);
                 }
             }
@@ -99,6 +108,11 @@
             }
         }
 
+        public function setErreurs($erreurs){
+            $this->erreurs = $erreurs;
+            return $this;
+        }
+
 
         /* --------------------------------------------- */
         /* GETTERS - GETTERS - GETTERS - GETTERS - GETTERS */
@@ -143,6 +157,10 @@
 
         public function getStatus(){
             return $this->status;
+        }
+
+        public function getErreurs(){
+            return $this->erreurs;
         }
 
     }
