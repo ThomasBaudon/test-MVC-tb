@@ -1,17 +1,15 @@
 <?php 
 
+require_once('../Models/Pdo.php');
 require_once('../Models/Room.php');
 require_once('../Models/RoomManager.php');
-require_once('../Controller/Controller.php');
 
+$room = new RoomManager($pdo);
 
+$rooms = $room->getAllRooms();
 
-// if($_POST){
-//     postRoom();
-// }
+var_dump($rooms);
 
-$room = new Room;
-$allRooms = $room->home();
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +43,7 @@ $allRooms = $room->home();
             <tbody>
                 <?php 
                     // $getRooms = getAllRooms();
-                    while ($room = $allRooms->fetch(PDO::FETCH_ASSOC)){
+                    while ($room = $rooms->fetch(PDO::FETCH_ASSOC)){
                 ?>
                     <tr>
                         <td> <?php echo $room['title_room']; ?></td>
