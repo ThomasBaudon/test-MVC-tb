@@ -13,14 +13,6 @@
         const CHILDREN_INVALIDE = 7;
         const STATUS_INVALIDE = 8;
 
-        // Constructor
-        // public function __construct($data)
-        // {
-        //     if (!empty($data)) {
-        //         $this->assignement($data);
-        //     }
-        // }
-
         // Assignement
         public function assignement($data)
         {

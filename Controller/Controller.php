@@ -4,7 +4,7 @@
     require_once('../Models/RoomManager.php');
     $room = new RoomManager($pdo);
 
-    function home()
+    function displayRooms()
     {
         global $room;
         $getRooms = $room->getAllRooms();

@@ -1,6 +1,6 @@
 <?php 
 
-require_once('Pdo.php');
+require_once('pdo.php');
 require_once('Room.php');
 
 class RoomManager{
@@ -46,14 +46,15 @@ class RoomManager{
     public function insertRoom(Room $room)
     {
         $req = $this->dataBase->prepare("INSERT INTO room(title_room, price_room, type_chambre, size, description, adults, children) VALUES(:title_room, :price_room, :type_chambre, :size, :description, :adults, :children)");
-        $req->bindValue(':title_room', $room->getTitle(), PDO::PARAM_STR);
-        $req->bindValue(':price_room', $room->getPrice(), PDO::PARAM_STR);
-        $req->bindValue(':type_chambre', $room->getType(), PDO::PARAM_STR);
-        $req->bindValue(':size', $room->getSize(), PDO::PARAM_STR);
-        $req->bindValue(':description', $room->getDescription(), PDO::PARAM_STR);
-        $req->bindValue(':adults', $room->getAdults(), PDO::PARAM_STR);
-        $req->bindValue(':children', $room->getChildren(), PDO::PARAM_STR);
-        $req->execute();
+        // $req->bindValue(':title_room', $room->getTitle(), PDO::PARAM_STR);
+        echo $room->getTitle();
+        // $req->bindValue(':price_room', $room->getPrice(), PDO::PARAM_STR);
+        // $req->bindValue(':type_chambre', $room->getType(), PDO::PARAM_STR);
+        // $req->bindValue(':size', $room->getSize(), PDO::PARAM_STR);
+        // $req->bindValue(':description', $room->getDescription(), PDO::PARAM_STR);
+        // $req->bindValue(':adults', $room->getAdults(), PDO::PARAM_INT);
+        // $req->bindValue(':children', $room->getChildren(), PDO::PARAM_INT);
+        // $req->execute();
     }
 
 }
