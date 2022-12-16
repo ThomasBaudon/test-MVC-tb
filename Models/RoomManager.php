@@ -12,6 +12,12 @@ class RoomManager{
         $this->dataBase = $dataBase;
     }
 
+    // public function displayError()
+    // {
+    //     $erreurs = $this->getErreurs();
+    //     return $erreurs;
+    // }
+
     public function getAllRooms()
     {
         $getRooms = $this->dataBase->query("SELECT * FROM room ORDER BY size DESC");
@@ -36,11 +42,11 @@ class RoomManager{
 
     public function deleteRoom()
     {
-        if($_GET['action'] = "delete")
-        {
+        // if($_GET['action'] = "delete")
+        // {
             $deleteRoom = $this->dataBase;
             $del = $deleteRoom->query("DELETE FROM room WHERE id_room = '$_GET[id_room]'");
-        }
+        // }
     }
 
     public function insertRoom(Room $room)
@@ -57,6 +63,16 @@ class RoomManager{
     }
 
 }
+
+// $req = $this->dataBase->prepare("INSERT INTO room(title_room, price_room, type_chambre, size, description, adults, children) VALUES(:title_room, :price_room, :type_chambre, :size, :description, :adults, :children)");
+// $req->bindValue(':title_room', $room->getTitle(), PDO::PARAM_STR);
+// $req->bindValue(':price_room', $room->getPrice(), PDO::PARAM_STR);
+// $req->bindValue(':type_chambre', $room->getType(), PDO::PARAM_STR);
+// $req->bindValue(':size', $room->getSize(), PDO::PARAM_STR);
+// $req->bindValue(':description', $room->getDescription(), PDO::PARAM_STR);
+// $req->bindValue(':adults', $room->getAdults(), PDO::PARAM_INT);
+// $req->bindValue(':children', $room->getChildren(), PDO::PARAM_INT);
+// $req->execute();
 
 // $req = $this->dataBase->prepare("INSERT INTO room(title_room, price_room, type_chambre, size, description, adults, children) VALUES(:title_room, :price_room, :type_chambre, :size, :description, :adults, :children)");
 // $req->bindValue(':title_room', $_POST['title_room'], PDO::PARAM_STR);

@@ -7,7 +7,8 @@ require_once('../Models/RoomManager.php');
 $room = new RoomManager($pdo);
 $success = "";
 
-if($_POST){
+/* POST ROOM */
+if(!empty($_POST)){
     $adRoom = new Room(
         [
         'title_room' => $_POST['title_room'],
@@ -22,11 +23,14 @@ if($_POST){
 
     $room->insertRoom($adRoom);
     $success = '<div class="alert alert-success" role="alert">L\'utilisateur a bien été enregistré</div>';
-}
+};
 
-// if($_POST){
-//     var_dump($_POST['title_room'], $_POST['price_room'], $_POST['type_chambre'], $_POST['size'], $_POST['description'], $_POST['adults'], $_POST['children']);
-// }
+
+/* DELETE ROOM */
+if(isset($_GET['action']) && $_GET['action'] == 'delete'){
+    $room->deleteRoom($room);
+    header('location:views/roomPage.php ');
+}
 
 ?>
 
@@ -44,20 +48,22 @@ if($_POST){
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-10 table-responsive">
 
         <?php echo $success; ?>
 
             <table class="table">
-
-            <thead>
-                <th>Titre</th>
-                <th>Prix</th>
-                <th>Type</th>
-                <th>Taille</th>
-                <th>Description</th>
-                <th>Adlutes</th>
-                <th>Enfants</th>
+            <!-- <caption>Liste des chambres</caption> -->
+            <thead class="table-light">
+                <th scope="col">id</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Type</th>
+                <th scope="col">Taille</th>
+                <th scope="col">Description</th>
+                <th scope="col">Adultes</th>
+                <th scope="col">Enfants</th>
+                <th scope="col">Actions</th>
             </thead>
 
             <tbody>
@@ -66,6 +72,7 @@ if($_POST){
                     while ($room = $rooms->fetch(PDO::FETCH_ASSOC)){
                 ?>
                     <tr>
+                        <td> <?php echo $room['id_room']; ?></td>
                         <td> <?php echo $room['title_room']; ?></td>
                         <td> <?php echo $room['price_room']; ?> €</td>
                         <td> <?php echo $room['type_chambre']; ?></td>
@@ -73,6 +80,11 @@ if($_POST){
                         <td> <?php echo $room['description']; ?></td>
                         <td> <?php echo $room['adults']; ?></td>
                         <td> <?php echo $room['children']; ?></td>
+                        <td>
+                            
+                            <a href="<?php echo "?action=update&id_room=$id_room"; ?>" class="btn btn-warning"> Update</a>
+                            <a href="<?php echo "?action=delete&id_room=$room[id_room]"; ?>" class="btn btn-danger"> delete</a>
+                        </td>
                     </tr>                 
                 <?php 
                     }
