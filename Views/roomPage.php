@@ -186,7 +186,7 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
                     <label for="status" class="form-label">Statut de la chambre</label>
                     <select class="form-select mb-3" aria-label="status" name="status" id="status">
                         <option value="libre" <?php if($status == 'libre'){echo "selected";}?>>Libre</option>
-                        <option value="réservée" <?php if($status == 'reservee'){echo "selected";}?>>Réservée</option>
+                        <option value="réservée" <?php if($status == 'réservée'){echo "selected";}?>>Réservée</option>
                     </select>
                 </div>
                     
