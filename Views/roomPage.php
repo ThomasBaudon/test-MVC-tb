@@ -42,13 +42,12 @@ if(isset($_GET['action']) && $_GET['action'] == 'update'){
 
     if(!empty($_POST)){
         $room->updateRoom($room);
-        $success = '<div class="alert alert-success" role="alert">La room a bioen été mise à jours</div>';
     }
 
 }
 
 /* POST ROOM */
-if(!empty($_POST) && !isset($_GET['action']) && $_GET['action'] == 'update'){
+if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'update'){
     $adRoom = new Room(
         [
         'title_room' => $_POST['title_room'],
@@ -185,7 +184,10 @@ if(!empty($_POST) && !isset($_GET['action']) && $_GET['action'] == 'update'){
                     
                 <div class="mb-3">
                     <label for="status" class="form-label">Statut de la chambre</label>
-                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" value="<?php echo $status ?>">
+                    <select class="form-select mb-3" aria-label="status" name="status" id="status">
+                        <option value="libre" <?php if($status == 'libre'){echo "selected";}?>>Libre</option>
+                        <option value="réservée" <?php if($status == 'reservee'){echo "selected";}?>>Réservée</option>
+                    </select>
                 </div>
                     
                 <div class="mb-3">
