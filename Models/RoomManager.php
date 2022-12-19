@@ -31,14 +31,6 @@ class RoomManager{
         return $getIdRoom;
     }
 
-    public function updateRoom()
-    {
-        $updateRoom = $this->dataBase;
-        if(!empty($_POST))
-        {
-            $reqUpdate = $updateRoom->query("UPDATE room SET title_room = '$_POST[title_room]', price_room = '$_POST[price_room]', type_chambre = '$_POST[type_chambre]', size = '$_POST[size], description = '$_POST[description], adults = '$_POST[adults],  children = '$_POST[children], status = '$_POST[status]'");
-        }
-    }
 
     public function deleteRoom()
     {
@@ -61,6 +53,26 @@ class RoomManager{
         $req->bindValue(':children',  $_POST['children'], PDO::PARAM_INT);
         $req->bindValue(':status',  $_POST['status'], PDO::PARAM_INT);
         $req->execute();
+    }
+
+    public function updateRoom()
+    {
+        // $updateRoom = $this->dataBase;
+
+        $reqUpdate = $this->dataBase->prepare("UPDATE room SET title_room = :title_room , price_room = :price_room, type_chambre = :type_chambre, size = :size, description = :description, adults = :adults,  children = :children, status = :status WHERE id_room = $_GET[id_room]");
+
+        $reqUpdate->bindValue(':title_room', $_POST['title_room'], PDO::PARAM_STR);
+        $reqUpdate->bindValue(':price_room',  $_POST['price_room'], PDO::PARAM_STR);
+        $reqUpdate->bindValue(':type_chambre',  $_POST['type_chambre'], PDO::PARAM_STR);
+        $reqUpdate->bindValue(':size',  $_POST['size'], PDO::PARAM_STR);
+        $reqUpdate->bindValue(':description',  $_POST['description'], PDO::PARAM_STR);
+        $reqUpdate->bindValue(':adults',  $_POST['adults'], PDO::PARAM_INT);
+        $reqUpdate->bindValue(':children',  $_POST['children'], PDO::PARAM_INT);
+        $reqUpdate->bindValue(':status',  $_POST['status'], PDO::PARAM_INT);
+        $reqUpdate->execute();
+
+        header('location:roomPage.php ');
+
     }
 
 }

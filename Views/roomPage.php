@@ -7,24 +7,15 @@ require_once('../Models/RoomManager.php');
 $room = new RoomManager($pdo);
 $success = "";
 
-/* POST ROOM */
-if(!empty($_POST)){
-    $adRoom = new Room(
-        [
-        'title_room' => $_POST['title_room'],
-        'price_room' => $_POST['price_room'],
-        'type_chambre' => $_POST['type_chambre'],
-        'size' => $_POST['size'],
-        'description' => $_POST['description'],
-        'adults' => $_POST['adults'],
-        'children' => $_POST['children']
-        ]
-    );
-
-    $room->insertRoom($adRoom);
-    $success = '<div class="alert alert-success" role="alert">L\'utilisateur a bien été enregistré</div>';
-};
-
+$id_room ="";
+$title_room ="";
+$price_room ="";
+$type_chambre ="";
+$size ="";
+$description ="";
+$adults ="";
+$children ="";
+$status ="";
 
 /* DELETE ROOM */
 if(isset($_GET['action']) && $_GET['action'] == 'delete'){
@@ -34,14 +25,48 @@ if(isset($_GET['action']) && $_GET['action'] == 'delete'){
 
 /* UPDATE ROOM */
 if(isset($_GET['action']) && $_GET['action'] == 'update'){
+
     $idRoom = $room->getRoomById();
     $detailRoom = $idRoom->fetch(PDO::FETCH_ASSOC);
 
-    if($_POST){
+
+    $id_room = (isset($detailRoom['id_room'])) ? $detailRoom['id_room'] : "" ;
+    $title_room = (isset($detailRoom['title_room'])) ? $detailRoom['title_room'] : "" ;
+    $price_room = (isset($detailRoom['price_room'])) ? $detailRoom['price_room'] : "" ;
+    $type_chambre = (isset($detailRoom['type_chambre'])) ? $detailRoom['type_chambre'] : "" ;
+    $size = (isset($detailRoom['size'])) ? $detailRoom['size'] : "" ;
+    $description = (isset($detailRoom['description'])) ? $detailRoom['description'] : "" ;
+    $adults = (isset($detailRoom['adults'])) ? $detailRoom['adults'] : "" ;
+    $children = (isset($detailRoom['children'])) ? $detailRoom['children'] : "" ;
+    $status = (isset($detailRoom['status'])) ? $detailRoom['status'] : "" ;
+
+    if(!empty($_POST)){
         $room->updateRoom($room);
-        header('location:roomPage.php ');
+        $success = '<div class="alert alert-success" role="alert">La room a bioen été mise à jours</div>';
     }
+
 }
+
+/* POST ROOM */
+if(!empty($_POST) && !isset($_GET['action']) && $_GET['action'] == 'update'){
+    $adRoom = new Room(
+        [
+        'title_room' => $_POST['title_room'],
+        'price_room' => $_POST['price_room'],
+        'type_chambre' => $_POST['type_chambre'],
+        'size' => $_POST['size'],
+        'description' => $_POST['description'],
+        'adults' => $_POST['adults'],
+        'children' => $_POST['children'],
+        'status' => $_POST['status']
+        ]
+    );
+
+    $room->insertRoom($adRoom);
+    $success = '<div class="alert alert-success" role="alert">L\'utilisateur a bien été enregistré</div>';
+}
+
+
 
 ?>
 
@@ -57,6 +82,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'update'){
 </head>
 <body>
 
+<!-- TABLE ROOMS -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-10 table-responsive">
@@ -74,6 +100,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'update'){
                 <th scope="col">Description</th>
                 <th scope="col">Adultes</th>
                 <th scope="col">Enfants</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
             </thead>
 
@@ -91,6 +118,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'update'){
                         <td> <?php echo $room['description']; ?></td>
                         <td> <?php echo $room['adults']; ?></td>
                         <td> <?php echo $room['children']; ?></td>
+                        <td> <?php echo $room['status']; ?></td>
                         <td>
                             
                             <a href="<?php echo "?action=update&id_room=$room[id_room]"; ?>" class="btn btn-warning"> Update</a>
@@ -108,9 +136,11 @@ if(isset($_GET['action']) && $_GET['action'] == 'update'){
     </div>
 </div>
 
+<br>
 <hr>
-<hr>
+<br>
 
+<!-- FORM ROOMS -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
@@ -120,42 +150,42 @@ if(isset($_GET['action']) && $_GET['action'] == 'update'){
                     
                 <div class="mb-3">
                     <label for="title_room" class="form-label">Titre</label>
-                    <input type="text" id="title_room" name="title_room" class="form-control" placeholder="Title" value="<?php echo $detailRoom['title_room'] ?> ">
+                    <input type="text" id="title_room" name="title_room" class="form-control" placeholder="Title" value="<?php echo $title_room ?>">
                 </div>
                     
                 <div class="mb-3">
                     <label for="price_room" class="form-label">Prix</label>
-                    <input type="text" id="price_room" name="price_room" class="form-control" placeholder="Prix" value="<?php echo $detailRoom['price_room'] ?>">
+                    <input type="text" id="price_room" name="price_room" class="form-control" placeholder="Prix" value="<?php echo $price_room ?>">
                 </div>
                     
                 <div class="mb-3">
                     <label for="type_chambre" class="form-label">Type de chambre</label>
-                    <input type="text" id="type_chambre" name="type_chambre" class="form-control" placeholder="Type de chambre" value="<?php echo $detailRoom['type_chambre'] ?> ">
+                    <input type="text" id="type_chambre" name="type_chambre" class="form-control" placeholder="Type de chambre" value="<?php echo $type_chambre ?>">
                 </div>
                     
                 <div class="mb-3">
                     <label for="size" class="form-label">Taille de la chambre</label>
-                    <input type="text" id="size" name="size" class="form-control" placeholder="Taille de la chambre" value="<?php echo $detailRoom['size'] ?> ">
+                    <input type="text" id="size" name="size" class="form-control" placeholder="Taille de la chambre" value="<?php echo $size ?>">
                 </div>
                     
                 <div class="mb-3">
                     <label for="description" class="form-label">Description de la chambre</label>
-                    <textarea type="text" id="description" name="description" class="form-control" placeholder="Description de la chambre"><?php echo $detailRoom['description'] ?></textarea>
+                    <textarea type="text" id="description" name="description" class="form-control" placeholder="Description de la chambre"><?php echo $description ?></textarea>
                 </div>
                     
                 <div class="mb-3">
                     <label for="adults" class="form-label">Adults de la chambre</label>
-                    <input type="text" id="adults" name="adults" class="form-control" placeholder="Adults" value="<?php echo $detailRoom['adults'] ?> ">
+                    <input type="text" id="adults" name="adults" class="form-control" placeholder="Adults" value="<?php echo $adults ?>">
                 </div>
                     
                 <div class="mb-3">
                     <label for="children" class="form-label">Children de la chambre</label>
-                    <input type="text" id="children" name="children" class="form-control" placeholder="Children" value="<?php echo $detailRoom['children'] ?> ">
+                    <input type="text" id="children" name="children" class="form-control" placeholder="Children" value="<?php echo $children ?>">
                 </div>
                     
                 <div class="mb-3">
                     <label for="status" class="form-label">Statut de la chambre</label>
-                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" value="<?php echo $detailRoom['status'] ?> ">
+                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" value="<?php echo $status ?>">
                 </div>
                     
                 <div class="mb-3">
