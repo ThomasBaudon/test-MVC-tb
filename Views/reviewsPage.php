@@ -1,11 +1,5 @@
 <?php 
 
-/* ROOMS */
-// require_once('../Models/Room.php');
-// require_once('../Models/RoomManager.php');
-// $room = new RoomManager($pdo);
-
-
 /* REVIEWS */
 require_once('../Models/Pdo.php');
 require_once('../Models/Reviews.php');
@@ -153,9 +147,24 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
                     ?>
 
                         <!-- CLIENT BASE -->
+
                         <div class="mb-3">
-                            <label for="client" class="form-label">Client</label>
-                            <input type="text" id="client" name="client" class="form-control" placeholder="Client">
+                            <label for="id_cli" class="form-label">Client</label>
+                            <select class="form-select mb-3" aria-label="id_cli" name="id_cli" id="id_cli">
+                                <option value=""> --Selectioner un client-- </option>
+
+                                <?php 
+                                    $findAllClients = $review->getAllClients($review);
+                                    $getAllClients = $findAllClients->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach( $getAllClients as $clients):
+                                ?>
+                                <!-- <textarea name="" id="" cols="30" rows="10">
+                                    <?php var_dump($clients['firstname']) ?>
+                                </textarea> -->
+                                <option><?php echo $clients['id_cli']." - ".$clients['firstname']." ".$clients['lastname'];?></option>
+
+                                <?php endforeach ?>
+                            </select>
                         </div>
 
                     <?php } else { ?>
@@ -171,13 +180,13 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
 
                     <!-- REVIEW -->
                     <div class="mb-3">
-                        <label for="review" class="form-label">Review</label>
+                        <label for="review" class="form-label">Avis</label>
                         <textarea class="form-control" name="review" id="review" name="review"><?php echo $reviewText ?></textarea>
                     </div>
 
                     <!-- RATING -->
                     <div class="mb-3">
-                        <label for="rating" class="form-label">Rating</label>
+                        <label for="rating" class="form-label">Note</label>
                         <input type="text" id="rating" name="rating" class="form-control" placeholder="Rating" value="<?php echo $rating ?>">
                     </div>
 
@@ -185,16 +194,33 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
                     <?php  if(!isset($_GET['action']) && !isset($_GET['action']) == 'update'){?>
 
                         <!-- ID ROOM NORMAL -->
-                        <div class="mb-3">
-                            <label for="id_room" class="form-label">Id_room</label>
+                        <!-- <div class="mb-3">
+                            <label for="id_room" class="form-label">Chambre</label>
                             <input type="text" id="id_room" name="id_room" class="form-control" placeholder="Id_room">
+                        </div> -->
+
+                        <div class="mb-3">
+                            <label for="id_room" class="form-label">Chambre</label>
+                            <select class="form-select mb-3" aria-label="id_room" name="id_room" id="id_room">
+                                <option value=""> --Selectioner une chambre-- </option>
+
+                                <?php 
+                                    $findAllRooms = $review->getAllRooms($review);
+                                    $getAllRooms = $findAllRooms->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach( $getAllRooms as $rooms):
+                                ?>
+
+                                <option><?php echo $rooms['id_room']." - ".$rooms['title_room'];?></option>
+
+                                <?php endforeach ?>
+                            </select>
                         </div>
 
                     <?php } else { ?>
 
                         <!-- ID ROOM UPDATE-->
                         <div class="mb-3">
-                            <label for="id_room" class="form-label">Id_room</label>
+                            <label for="id_room" class="form-label">Chambre</label>
                             <input type="text" id="id_room" name="id_room" class="form-control" placeholder="Id_room"
                                     value="<?php echo $detailReview['id_room']." - ".$detailReview['title_room']?>">
                         </div>

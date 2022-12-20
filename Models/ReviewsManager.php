@@ -24,6 +24,26 @@ class ReviewsManager{
         return $getAllReviews;
     }
 
+
+    /* FIND ALL CLIENTS */
+
+    public function getAllClients(){
+        $getAllClients = $this->dataBase->query("SELECT * FROM client
+        INNER JOIN reviews ON client.id_cli = reviews.id_cli
+        ORDER BY client.id_cli");
+        return $getAllClients;
+    }
+
+
+    /* FIND ALL ROOMS */
+
+    public function getAllRooms(){
+        $getAllRooms = $this->dataBase->query("SELECT * FROM room
+        INNER JOIN reviews ON room.id_room = reviews.id_room
+        ORDER BY room.id_room");
+        return $getAllRooms;
+    }
+
     /* FIND BY ID */
     public function getReviewsById()
     {
