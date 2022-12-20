@@ -105,7 +105,7 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
                             <td><?php echo $reviewAll['lastname']." ".$reviewAll['firstname'];?></td>
                             <td><?php echo $reviewAll['review'];?></td>
                             <td><?php echo $reviewAll['rating'];?></td>
-                            <td><?php echo $reviewAll['title_room'];?></td>
+                            <td><?php echo $reviewAll['id_room']." - ".$reviewAll['title_room'];?></td>
                             <td><?php echo $reviewAll['moderation'];?></td>
                             <td> 
                                 <a href="<?php echo "?action=update&id_reviews=$reviewAll[id_reviews]"; ?>" class="btn btn-warning">Update</a>
