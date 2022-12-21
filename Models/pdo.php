@@ -13,9 +13,9 @@
         {
             echo "Erreur de connexion à la bdd" . $e->getMessage();
         }
-    // return $pdo;
 
-
+    // define('URL', 'http://localhost:8888/test-MVC-tb/');
+    // define('RACINE', $_SERVER['DOCUMENT_ROOT'] . '/test-MVC-tb/');
 
 ?>
 

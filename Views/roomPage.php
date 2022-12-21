@@ -69,17 +69,15 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rooms</title>
-    <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
-<body>
+<?php require_once('./inc/header.inc.php'); ?>
+
+<div class="container mt-3 mb-3">
+    <div class="row">
+        <div class="col-12 justify-content-center">
+            <h1 class="text-center">ROOMS</h1>
+        </div>
+    </div>
+</div>
 
 <!-- TABLE ROOMS -->
 <div class="container">
@@ -88,7 +86,7 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
 
         <?php echo $success; ?>
 
-            <table class="table">
+            <table class="table table-hover">
             <!-- <caption>Liste des chambres</caption> -->
             <thead class="table-light">
                 <th scope="col">id</th>
@@ -101,6 +99,7 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
                 <th scope="col">Enfants</th>
                 <th scope="col">Status</th>
                 <th scope="col">Actions</th>
+                <th></th>
             </thead>
 
             <tbody>
@@ -119,8 +118,10 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
                         <td> <?php echo $room['children']; ?></td>
                         <td> <?php echo $room['status']; ?></td>
                         <td>
-                            
                             <a href="<?php echo "?action=update&id_room=$room[id_room]"; ?>" class="btn btn-warning"> Update</a>
+                            
+                        </td>
+                        <td>
                             <a href="<?php echo "?action=delete&id_room=$room[id_room]"; ?>" class="btn btn-danger"> delete</a>
                         </td>
                     </tr>                 
@@ -202,5 +203,4 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
 
 
     
-</body>
-</html>
+<?php require_once('./inc/footer.inc.php'); ?>

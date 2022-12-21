@@ -13,6 +13,7 @@ $firstname="";
 $email="";
 $message="";
 $date="";
+$status="";
 
 
 /* DELETE CONTACT */
@@ -36,6 +37,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'update'){
     $email = (isset($detailContact['email'])) ? $detailContact['email'] : "" ;
     $message = (isset($detailContact['message'])) ? $detailContact['message'] : "" ;
     $date = (isset($detailContact['date'])) ? $detailContact['date'] : "" ;
+    $status = (isset($detailContact['read_status'])) ? $detailContact['read_status'] : "" ;
     
 
     if(!empty($_POST)){
@@ -62,17 +64,15 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
-<body>
+<?php require_once('./inc/header.inc.php'); ?>
+
+<div class="container mt-3 mb-3">
+    <div class="row">
+        <div class="col-12 justify-content-center">
+            <h1 class="text-center">CONTACT PAGE</h1>
+        </div>
+    </div>
+</div>
 
 <!-- TABLE ROOMS -->
 <div class="container">
@@ -81,7 +81,7 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
 
         <?php echo $success; ?>
 
-            <table class="table">
+            <table class="table table-hover">
             <!-- <caption>Liste des chambres</caption> -->
             <thead class="table-light">
                 <th scope="col">id</th>
@@ -92,6 +92,7 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
                 <th scope="col">Date</th>
                 <th scope="col">Lu</th>
                 <th scope="col">Actions</th>
+                <th></th>
             </thead>
 
             <tbody>
@@ -100,20 +101,20 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
                     while ($contact = $contacts->fetch(PDO::FETCH_ASSOC)){
                 ?>
                     <tr>
-                        <td> <?php echo $contact['id_contact']; ?></td>
-                        <td> <?php echo $contact['lastname']; ?></td>
-                        <td> <?php echo $contact['firstname']; ?></td>
-                        <td>
+                        <td class="align-middle"> <?php echo $contact['id_contact']; ?></td>
+                        <td class="align-middle"> <?php echo $contact['lastname']; ?></td>
+                        <td class="align-middle"> <?php echo $contact['firstname']; ?></td>
+                        <td class="align-middle">
                                 <a href="mailto:<?php echo $contact['email']; ?>">
                             <?php echo $contact['email']; ?></a>
                         </td>
-                        <td> <?php echo $contact['message']; ?></td>
-                        <td> <?php echo $contact['date']; ?></td>
-                        <td> oui</td>
-                        <td>
+                        <td class="align-middle text-truncate" style="max-width: 13rem;"> <?php echo $contact['message']; ?></td>
+                        <td class="align-middle"> <?php echo $contact['date']; ?></td>
+                        <td class="align-middle"><?php echo $contact['read_status']; ?></td>
+                        <td class="align-middle">
                             <a href="<?php echo "?action=update&id_contact=$contact[id_contact]"; ?>" class="btn btn-warning"> Update</a>
                         </td>
-                        <td>
+                        <td class="align-middle">
                         <a href="<?php echo "?action=delete&id_contact=$contact[id_contact]"; ?>" class="btn btn-danger"> delete</a>
                         </td>
                     </tr>                 
@@ -193,5 +194,4 @@ if(!empty($_POST) && !isset($_GET['action']) && !isset($_GET['action']) == 'upda
 
 
     
-</body>
-</html>
+<?php require_once('./inc/footer.inc.php'); ?>
