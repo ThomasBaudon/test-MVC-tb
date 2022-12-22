@@ -1,5 +1,14 @@
-<?php require_once '../Models/pdo.php';
-    // var_dump($pdo);
+<?php
+
+require_once '../Models/pdo.php';
+
+/* DECONNEXION */
+if(isset($_GET['action']) && $_GET['action'] == 'deconnexion'){
+    // session_destroy();
+    session_unset();
+    header('location:../front/index.php');
+}
+    
 ?>
 
 
@@ -48,7 +57,7 @@
                         <a class="nav-link" href="admin_carrousel.php">Carrousel</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Connexion</a>
+                        <a class="nav-link" href="?action=deconnexion">Déconnexion</a>
                     </li>
                 </ul>
             </div>

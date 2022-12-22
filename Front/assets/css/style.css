@@ -5,6 +5,7 @@
   list-style: none;
 }
 
+
 @font-face {
   font-family: Canada-Type-Orpheus-Pro;
   src: local("Canada-Type-Orpheus-Pro"), local("Canada-Type-Orpheus-Pro"),
@@ -128,17 +129,31 @@ ul {
   justify-content: space-evenly;
   align-items: center;
   align-content: stretch;
+  padding-left: 0;
 }
 
 header a {
   color: #211f20;
   text-decoration: none;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
   /* padding: 5px 10px 5px 10px; */
   font-family: "Bebas Neue", sans-serif;
   font-size: 1rem;
   letter-spacing: 2px;
 }
+
+header nav ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+
+/* header a:nth-of-type(1){
+  margin-left: 0;
+} */
 
 header a:hover {
   color: #9e864a;

@@ -2,11 +2,14 @@
         <header>
         <div id="topHead">
             <div class="logo-header">
-            <img
-                src="./assets/img/logo-hotello.svg"
-                alt="Logo de Hotello"
-                id="Hotello Logo"
-            />
+                <a href="index.php">
+                    <img
+                    src="./assets/img/logo-hotello.svg"
+                    alt="Logo de Hotello"
+                    id="Hotello Logo"
+                    />
+                </a>
+
             </div>
             <nav>
             <ul>
@@ -16,7 +19,16 @@
                 <li><a href="#">CONTACT</a></li>
             </ul>
             </nav>
-            <a href="connexion.php" class="connexion">CONNEXION</a>
+            <?php 
+
+                if($connected == true){
+                    echo "<a href=\"profil.php\" class=\"connexion\"><i class=\"bi bi-person-circle\"></i> $firstname</a>";
+                }else{
+                    echo"<a href=\"connexion.php\" class=\"connexion\">CONNEXION</a>";
+                }
+            
+            ?>
+            <!-- <a href="connexion.php" class="connexion">CONNEXION</a> -->
         </div>
         <div id="bottomHead">
             <h1>HOTELLO</h1>
