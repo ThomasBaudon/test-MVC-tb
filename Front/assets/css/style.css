@@ -103,7 +103,7 @@ header h4 {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   align-content: stretch;
   width: 100%;
   padding: .5rem 1rem;

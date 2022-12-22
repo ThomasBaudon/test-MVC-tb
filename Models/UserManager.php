@@ -42,6 +42,13 @@ class UserManager
         return $idUser;
     }
 
+    public function getProfilById()
+    {
+        $idCli = $_SESSION['client']['id_cli'];
+        $idUser = $this->dataBase->query("SELECT * FROM client WHERE id_cli = $idCli");
+        return $idUser;
+    }
+
     public function getUserByMail()
     {
         $mailUser = $this->dataBase->query("SELECT * FROM client WHERE mail = '$_POST[mail]'");
