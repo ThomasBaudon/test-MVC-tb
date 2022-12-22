@@ -35,18 +35,22 @@ class User
     // SETTERS
     public function setLastname($lastname)
     {
-        if (empty($lastname) || !is_string($lastname)) {
+        if (empty($lastname) || !is_string($lastname) || strlen($lastname) <= 3 || strlen($lastname) >= 25) {
             $this->erreur[] = self::LASTNAME_INVALIDE;
+            // echo '<div class="form-text text-danger fw-bold"> Le nom est invalide </div>';
         } else {
+            $lastname = htmlspecialchars(addslashes(trim($_POST['lastname'])));
             $this->lastname = $lastname;
         }
     }
 
     public function setFirstname($firstname)
     {
-        if (empty($firstname) || !is_string($firstname)) {
+        if (empty($firstname) || !is_string($firstname) || strlen($firstname) <= 3 || strlen($firstname) >= 25) {
             $this->erreur[] = self::FIRSTNAME_INVALIDE;
+            // echo '<div class="form-text text-danger fw-bold"> Le prénom est invalide </div>';
         } else {
+            $firstname = htmlspecialchars(addslashes(trim($_POST['firstname'])));
             $this->firstname = $firstname;
         }
     }
@@ -55,16 +59,20 @@ class User
     {
         if (empty($mail) || !filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             $this->erreur[] = self::MAIL_INVALIDE;
+            // echo '<div class="form-text text-danger fw-bold"> L\'email est invalide </div>';
         } else {
+            $mail = htmlspecialchars(addslashes(trim($_POST['mail'])));
             $this->mail = $mail;
         }
     }
 
     public function setPassword($password)
     {
-        if (empty($password)) {
+        if (empty($password) || strlen($password) <= 4 || strlen($password) >= 20) {
             $this->erreur[] = self::PASSWORD_INVALIDE;
         } else {
+            $mdp = htmlspecialchars(addslashes(trim($_POST['password'])));
+            $password = password_hash($mdp, PASSWORD_DEFAULT);
             $this->password = $password;
         }
     }
@@ -74,33 +82,37 @@ class User
         if (empty($address)) {
             $this->erreur[] = self::ADDRESS_INVALIDE;
         } else {
+            $address = htmlspecialchars(addslashes(trim($_POST['address'])));
             $this->address = $address;
         }
     }
 
     public function setCity($city)
     {
-        if (empty($city)) {
+        if (empty($city) || !is_string($city)) {
             $this->erreur[] = self::CITY_INVALIDE;
         } else {
+            $city = htmlspecialchars(addslashes(trim($_POST['city'])));
             $this->city = $city;
         }
     }
 
     public function setZipcode($zipcode)
     {
-        if (empty($zipcode)) {
+        if (empty($zipcode) || strlen($zipcode) !== 5 && is_string($zipcode)) {
             $this->erreur[] = self::ZIPCODE_INVALIDE;
         } else {
+            $zipcode = htmlspecialchars(addslashes(trim($_POST['zipcode'])));
             $this->zipcode = $zipcode;
         }
     }
 
     public function setPhone($phone)
     {
-        if (empty($phone)) {
+        if (empty($phone) || strlen($phone) !== 10 && is_string($phone)) {
             $this->erreur[] = self::PHONE_INVALIDE;
         } else {
+            $phone = htmlspecialchars(addslashes(trim($_POST['phone'])));
             $this->phone = $phone;
         }
     }
@@ -108,7 +120,9 @@ class User
     public function setBirhtdate($birthdate)
     {
 
-        if (empty($birthdate)) {
+        $currentDate = 2022;
+
+        if (empty($birthdate) || $currentDate - 100) {
             $this->erreur[] = self::BIRTHDATE_INVALIDE;
         } else {
 
@@ -118,9 +132,10 @@ class User
 
     public function setCountry($country)
     {
-        if (empty($country)) {
+        if (empty($country) || !is_string($country)) {
             $this->erreur[] = self::COUNTRY_INVALIDE;
         } else {
+            $country = htmlspecialchars(addslashes(trim($_POST['country'])));
             $this->country = $country;
         }
     }

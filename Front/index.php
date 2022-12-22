@@ -1,45 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
-        rel="stylesheet"
-        />
-        <link rel="stylesheet" href="./assets/css/style.css" />
-        <title>Hotello</title>
-    </head>
-    <body>
+<?php 
 
-        <!-- HEADER -->
-        <header>
-        <div id="topHead">
-            <div class="logo-header">
-            <img
-                src="./assets/img/logo-hotello.svg"
-                alt="Logo de Hotello"
-                id="Hotello Logo"
-            />
-            </div>
-            <nav>
-            <ul>
-                <li><a class="l" href="index.html">ACCUEIL</a></li>
-                <li><a class="l" href="#">SERVICES</a></li>
-                <li><a class="l" href="room.php">CHAMBRES</a></li>
-                <li><a href="#">CONTACT</a></li>
-            </ul>
-            </nav>
-            <a href="connexion.php" class="connexion">CONNEXION</a>
-        </div>
-        <div id="bottomHead">
-            <h1>HOTELLO</h1>
-            <h5>Le plus bel endroit au monde</h5>
-        </div>
-        </header>
+    require_once('./inc/header.inc.php');
+    require_once('./inc/top-nav.inc.php');
+?>
+
+
 
         <!-- CONTAINER -->
         <div id="container">
@@ -254,51 +219,7 @@
         </div>
         </div>
 
-        <!-- FOOTER -->
-        <footer>
-            <div class="footer-block">
-                <ul>
-                    <li><a class="footerLinks" href="#">Accueil</a></li>
-                    <li><a class="footerLinks" href="#">Chambres</a></li>
-                    <li><a class="footerLinks" href="#">Services</a></li>
-                    <li><a class="footerLinks" href="#">Contact</a></li>
-                </ul>
-            </div>
+<?php 
+    require_once('./inc/footer.inc.php')
 
-            <div class="footer-block social">
-                <img src="./assets/img/logo-hotello-footer.svg" alt="Logo de Hotello" id="logoBig" />
-                <br>
-                <h3>SUIVEZ-NOUS</h3>
-                <div class="footer-social">
-                    <a href="#">
-                        <img src="./assets/img/facebook.svg" alt="logo de Facebook" />
-                    </a>
-                    <a href="#">
-                        <img src="./assets/img/instagram.svg" alt="logo d'Instagram" />
-                    </a>
-                    <a href="#">
-                        <img src="./assets/img/twitter.svg" alt="logo de Muskland" />
-                    </a>
-                </div>
-            </div>
-
-            <div class="footer-block">
-                <div class="adresse">
-
-                </div>
-                <h3>ADRESSE</h3>
-                <span>
-                10 rue des boulets <br />
-                75008 PARIS
-                </span>
-                <h3>CONTACT</h3>
-                <span> 01 23 45 67 89 <br /></span>
-                
-
-            </div>
-        </footer>
-
-
-        <script src="./assets/js/script.js"></script>
-    </body>
-</html>
+?>

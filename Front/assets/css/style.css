@@ -40,6 +40,10 @@ body {
   align-items: center;
 }
 
+h1{
+  font-family: "Canada-Type-Orpheus-Pro", sans-serif;
+}
+
 /* HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER */
 
 header {
@@ -663,4 +667,34 @@ footer .footer-block img{
   text-decoration: none;
   margin: 0;
   padding: 0;
+}
+
+
+/* --------------------------------------------------------------------- */
+/* CONNEXION - CONNEXION - CONNEXION - CONNEXION - CONNEXION - CONNEXION */
+/* --------------------------------------------------------------------- */
+
+.connexion-form button, .inscription-form button{
+  background-color: #c9a255;
+  color: #fff;
+  transition: .3s;
+}
+.connexion-form button:hover, .inscription-form button:hover{
+  background-color: #9e864a;
+  color: #fff;
+  transition: .3s;
+}
+
+.rdvInscription{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 97vw;
+  text-align: center;
+}
+
+.rdvInscription a{
+  text-decoration: none;
+  color: #c9a255;
 }

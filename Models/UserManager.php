@@ -44,6 +44,12 @@ class UserManager
         return $idUser;
     }
 
+    public function getUserByMail()
+    {
+        $mailUser = $this->dataBase->query("SELECT * FROM client WHERE mail = '$_GET[mail]'");
+        return $mailUser;
+    }
+
     public function updateUser()
     {
 
@@ -69,5 +75,9 @@ class UserManager
             $del = $deleteUser->query("DELETE FROM client WHERE id_cli = '$_GET[id_cli]'");
             return $del;
         }
+    }
+
+    public function isUserValid() {
+        return!(empty($this->lastname) || empty($this->firstname) || empty($this->mail) || empty($this->password));
     }
 }
