@@ -4,7 +4,7 @@
     require_once('../Models/UserManager.php');
 
     $success = '';
-    $erreurs = '';
+    // $erreurs = '';
 
     $userManager = new UserManager($pdo);
 

@@ -684,6 +684,43 @@ footer .footer-block img{
   padding: 0;
 }
 
+/* --------------------------------------------------------------------- */
+/* PROFILE BUTTON - PROFILE BUTTON - PROFILE BUTTON - PROFILE BUTTON */
+/* --------------------------------------------------------------------- */
+
+.menu-client{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.menu-client .submenu-client{
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  padding-top: .5rem;
+  display: none;
+  transition: .3s;
+  transform: translateY(1rem);
+}
+.menu-client:hover .submenu-client{
+  display: block;
+  transition: .3s;
+  transform: translateY(0rem);
+}
+
+.submenu-client ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+.submenu-client ul li{
+  padding: .2rem;
+}
+
 
 /* --------------------------------------------------------------------- */
 /* CONNEXION - CONNEXION - CONNEXION - CONNEXION - CONNEXION - CONNEXION */

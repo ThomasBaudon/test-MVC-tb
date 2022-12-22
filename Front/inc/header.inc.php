@@ -11,6 +11,13 @@
         $firstname = $_SESSION['client']['firstname'];
     }
 
+        /* DECONNEXION */
+        if(isset($_GET['action']) && $_GET['action'] == 'deconnexion'){
+            // session_destroy();
+            session_unset();
+            header('location:index.php');
+        }
+
 ?>
 
 

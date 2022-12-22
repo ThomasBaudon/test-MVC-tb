@@ -22,7 +22,25 @@
             <?php 
 
                 if($connected == true){
-                    echo "<a href=\"profil.php\" class=\"connexion\"><i class=\"bi bi-person-circle\"></i> $firstname</a>";
+                    echo "
+                    
+                    <div class=\"menu-client\">
+                    
+                    <a href=\"profil.php\" class=\"connexion\"><i class=\"bi bi-person-circle\"></i> $firstname</a>
+
+                        <div class=\"submenu-client\">
+                            <ul>
+                                <li>
+                                    <a href=\"profil.php\" class=\"\"> Profil</a>
+                                </li>
+                                <li>
+                                    <a href=\"?action=deconnexion\" class=\"\"> Déconnexion</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    
+                    </div>";
                 }else{
                     echo"<a href=\"connexion.php\" class=\"connexion\">CONNEXION</a>";
                 }
