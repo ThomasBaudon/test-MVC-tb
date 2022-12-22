@@ -46,7 +46,7 @@ class UserManager
 
     public function getUserByMail()
     {
-        $mailUser = $this->dataBase->query("SELECT * FROM client WHERE mail = '$_GET[mail]'");
+        $mailUser = $this->dataBase->query("SELECT * FROM client WHERE mail = '$_POST[mail]'");
         return $mailUser;
     }
 

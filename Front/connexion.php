@@ -1,25 +1,25 @@
 <?php 
-    require_once('../Models/pdo.php');
-    require_once('../Models/User.php');
-    require_once('../Models/UserManager.php');
+
+require_once('../Models/pdo.php');
+require_once('../Models/User.php');
+require_once('../Models/UserManager.php');
 
 
-    $error = '';
-    $success ='';
+$error ='';
+$success ='';
 
-    $userManager = new UserManager($pdo);
+$userManager = new UserManager($pdo);
 
-    if(isset($_GET['action']) && $_GET['action'] == 'deconnexion'){
-        // session_destroy();
-        session_unset();
-        header('location:index.php');
-    }
+    // if(isset($_GET['action']) && $_GET['action'] == 'deconnexion'){
+    //     // session_destroy();
+    //     session_unset();
+    //     header('location:index.php');
+    // }
 
     if(!empty($_POST['mail'])){
         $reqMail = $userManager->getUserByMail();
         if($reqMail->rowCount() >= 1){
             $client = $reqMail->fetch(PDO::FETCH_ASSOC);
-                
 
                 if(password_verify($_POST['password'], $client['password'])){
                     $_SESSION['client']['id_cli']= $client['id_cli'];
@@ -32,17 +32,15 @@
                     $_SESSION['client']['zipcode']= $client['zipcode'];
                     $_SESSION['client']['phone']= $client['phone'];
                     $_SESSION['client']['birthdate']= $client['birthdate'];
+                    $_SESSION['client']['status']= $client['status'];
                     $_SESSION['client']['country']= $client['country'];
 
-                    var_dump($_SESSION);
-                    // header('location:profil.php');
+                    header('location:profil.php');
                 }else{
                     $error .= '<div class="alert alert-danger">Le mot de passe n\'est pas correct</div>';
-                    var_dump($error);
                 }
             }else{
                 $error .= '<div class="alert alert-danger">L’adresse mail fournie n\'existe pas</div>';
-                var_dump($error);
             }
     }
 
@@ -63,8 +61,8 @@
 
                 <!-- EMAIL -->
                     <div class="mb-3">
-                        <label for="email" class="form-label">Votre adresse mail</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <label for="mail" class="form-label">Votre adresse mail</label>
+                        <input type="email" class="form-control" id="mail" name="mail">
                     </div>
                     <!-- PASSWORD -->
                     <div class="mb-3">
