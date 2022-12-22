@@ -16,8 +16,6 @@ class UserManager
     public function insertUser(User $user)
     {
 
-        // $mdp = password_hash($password, PASSWORD_DEFAULT);
-
         $req = $this->dataBase->prepare("INSERT INTO client(lastname, firstname, mail, password, address, city, zipcode, phone, birthdate, country) VALUES(:lastname, :firstname, :mail, :password, :address, :city, :zipcode, :phone, :birthdate, :country)");
         $req->bindValue(':lastname', $user->getLastname(), PDO::PARAM_STR);
         $req->bindValue(':firstname', $user->getFirstname());
@@ -79,5 +77,16 @@ class UserManager
 
     public function isUserValid() {
         return!(empty($this->lastname) || empty($this->firstname) || empty($this->mail) || empty($this->password));
+    }
+
+    public function clientConnected(){
+        if(isset($_SESSION['client']))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
